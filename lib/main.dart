@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
       onTap: () {
         Navigator.push(context, new MaterialPageRoute<Null>(
             settings: const RouteSettings(name: "/detail"),
-            builder: (BuildContext context) => new Detail(memo.body)
+            builder: (BuildContext context) => new Detail(memo)
         ));
       },
     );

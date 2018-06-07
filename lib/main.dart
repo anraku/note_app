@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/detail.dart';
 import 'package:todo_list/entity/memo.dart';
+import 'package:todo_list/create.dart';
 
 void main() => runApp(new MyApp());
 
@@ -38,7 +39,19 @@ class _HomeState extends State<Home> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: _list()
+      body: _list(),
+      floatingActionButton: new FloatingActionButton(
+        tooltip: 'add note',
+        child: new Icon(Icons.add),
+        onPressed: () {
+          Memo newMemo = new Memo('','');
+          memos.add(newMemo);
+          Navigator.push(context, new MaterialPageRoute<Null>(
+              settings: const RouteSettings(name: "/create"),
+              builder: (BuildContext context) => new Create(newMemo)
+          ));
+        }
+      ),
     );
   }
 

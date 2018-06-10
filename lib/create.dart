@@ -41,7 +41,7 @@ class Create extends StatelessWidget {
             child: new FlatButton(
               child: new Text('save memo'),
               color: Colors.lightBlue,
-              textColor: Colors.black45,
+              textColor: Colors.white,
               onPressed: () {
                 Navigator.pop(context);
               }

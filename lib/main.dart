@@ -58,25 +58,37 @@ class _HomeState extends State<Home> {
   Widget _list() {
     return new ListView.builder(
         padding: const EdgeInsets.all(16.0),
+        itemCount: memos.length,
         itemBuilder: (context, i) {
-          return _buildRow(memos[i]);
-        },
-        itemCount: memos.length
-    );
-  }
+          final item = memos[i];
+          return new Dismissible(
+            // Each Dismissible must contain a Key. Keys allow Flutter to
+            // uniquely identify Widgets.
+            key: new Key(item.title),
+            // We also need to provide a function that will tell our app
+            // what to do after an item has been swiped away.
+            onDismissed: (direction) {
+              memos.removeAt(i);
 
-  Widget _buildRow(Memo memo) {
-    return new ListTile(
-      title: new Text(
-        memo.title,
-        style: _biggerFont,
-      ),
-      onTap: () {
-        Navigator.push(context, new MaterialPageRoute<Null>(
-            settings: const RouteSettings(name: "/detail"),
-            builder: (BuildContext context) => new Detail(memo)
-        ));
-      },
+              Scaffold.of(context).showSnackBar(
+                  new SnackBar(content: new Text("Memo dismissed")));
+            },
+            // Show a red background as the item is swiped away
+            background: new Container(color: Colors.red),
+            child: new ListTile(
+              title: new Text(
+                item.title,
+                style: _biggerFont,
+              ),
+              onTap: () {
+                Navigator.push(context, new MaterialPageRoute<Null>(
+                    settings: const RouteSettings(name: "/detail"),
+                    builder: (BuildContext context) => new Detail(item)
+                ));
+              },
+            ),
+          );
+        },
     );
   }
 }

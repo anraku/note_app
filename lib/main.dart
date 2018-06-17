@@ -27,11 +27,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final memos = <Memo>[
-    new Memo('title1', 'memo1'),
-    new Memo('title2', 'memo2'),
-    new Memo('title3', 'memo3')
-  ];
+  List<Memo> memos = new List<Memo>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
   @override
   Widget build(BuildContext context) {
@@ -78,6 +74,7 @@ class _HomeState extends State<Home> {
             child: new ListTile(
               title: new Text(
                 item.title,
+                maxLines: 1,
                 style: _biggerFont,
               ),
               onTap: () {
